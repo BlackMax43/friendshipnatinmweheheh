@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Friendship Anniversary</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+}
+
+body{
+background:#0b0f1a;
+color:#e5e7eb;
+line-height:1.6;
+overflow-x:hidden;
+}
+
+/* particle background */
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
+}
+
+/* hero */
+
+.hero{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:40px 20px;
+}
+
+.hero h1{
+font-size:clamp(38px,5vw,60px);
+font-weight:600;
+}
+
+.hero p{
+margin-top:10px;
+opacity:.75;
+max-width:600px;
+}
+
+button{
+margin-top:30px;
+padding:14px 34px;
+font-size:16px;
+border:none;
+border-radius:30px;
+background:#6366f1;
+color:white;
+cursor:pointer;
+transition:.25s;
+}
+
+button:hover{
+background:#4f46e5;
+transform:scale(1.05);
+}
+
+/* section */
+
+.section{
+max-width:1100px;
+margin:auto;
+padding:80px 20px;
+text-align:center;
+opacity:0;
+transform:translateY(40px);
+transition:1s ease;
+}
+
+.section.show{
+opacity:1;
+transform:translateY(0);
+}
+
+/* message */
+
+.global-message{
+max-width:720px;
+margin:0 auto 60px auto;
+opacity:.9;
+}
+
+/* members */
+
+.members{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:18px;
+}
+
+.member{
+background:rgba(255,255,255,0.05);
+padding:18px;
+border-radius:14px;
+border:1px solid rgba(255,255,255,0.08);
+opacity:0;
+transform:translateY(20px);
+pointer-events:none;
+transition:.35s;
+}
+
+.member.visible{
+opacity:1;
+transform:translateY(0);
+pointer-events:auto;
+cursor:pointer;
+}
+
+.member:hover{
+background:rgba(255,255,255,0.1);
+transform:translateY(-5px);
+}
+
+/* popup */
+
+.popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.65);
+display:flex;
+justify-content:center;
+align-items:center;
+opacity:0;
+pointer-events:none;
+transition:.3s;
+}
+
+.popup.show{
+opacity:1;
+pointer-events:auto;
+}
+
+.popup-box{
+background:#111827;
+padding:30px;
+border-radius:14px;
+max-width:420px;
+width:90%;
+text-align:center;
+}
+
+.popup-box h3{
+margin-bottom:10px;
+}
+
+.popup-box button{
+margin-top:20px;
+}
+
+footer{
+text-align:center;
+padding:60px 20px;
+opacity:.5;
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="particles"></canvas>
+
+<div class="hero">
+
+<h1>Friendship Anniversary</h1>
+
+<p>
+Ang random lang ng start natin pero somehow naging solid friendship.
+</p>
+
+<button onclick="reveal()">Open Anniversary Message</button>
+
+</div>
+
+
+<section id="friendsSection" class="section">
+
+<div class="global-message">
+
+<h2>Para sa Inyong Lahat</h2>
+
+<p>
+Honestly ang random lang kung paano tayo nagkakilala but nown parang normal na part na kayo ng araw araw.
+
+Hindi man natin napapansin minsan pero ang dami na pala nating memories, kwentuhan, at moments na ginawa nating meaningful yung maliit na group na to.
+
+Kaya ginawa ko tong page na to para lang ipakita na importante kayo sa friendship na nabuo natin.
+
+Now click your mames sa ibaba.
+
+Sorry ganito lang makaya ko HAHAHAH -Gravy
+</p>
+
+</div>
+
+<h2>The People Who Made This Special</h2>
+
+<div class="members">
+
+<div class="member" onclick="openMessage('Nica')">Nica</div>
+<div class="member" onclick="openMessage('Theo')">Theo</div>
+<div class="member" onclick="openMessage('53zyr')">53zyr</div>
+<div class="member" onclick="openMessage('LUCIEN')">LUCIEN</div>
+<div class="member" onclick="openMessage('rm')">rm</div>
+<div class="member" onclick="openMessage('althxyzea')">althxyzea</div>
+<div class="member" onclick="openMessage('Atøshi')">Atøshi</div>
+<div class="member" onclick="openMessage('xeviI')">xeviI</div>
+<div class="member" onclick="openMessage('SEI')">SEI</div>
+<div class="member" onclick="openMessage('Emmann')">Emmann</div>
+<div class="member" onclick="openMessage('KORI WATER')">KORI WATER</div>
+<div class="member" onclick="openMessage('Xio_cyy')">Xio_cyy</div>
+<div class="member" onclick="openMessage('Zenu')">Zenu</div>
+<div class="member" onclick="openMessage('akki')">akki</div>
+<div class="member" onclick="openMessage('ZOERN')">ZOERN</div>
+<div class="member" onclick="openMessage('freak')">freak</div>
+<div class="member" onclick="openMessage('Michael')">Michael</div>
+<div class="member" onclick="openMessage('Lordi')">Lordi</div>
+<div class="member" onclick="openMessage('Jhen')">Jhen</div>
+<div class="member" onclick="openMessage('YERI')">YERI</div>
+<div class="member" onclick="openMessage('rockyy')">rockyy</div>
+<div class="member" onclick="openMessage('grain of ryze')">grain of ryze</div>
+<div class="member" onclick="openMessage('kulort')">kulort</div>
+<div class="member" onclick="openMessage('Kyo_J')">Kyo_J</div>
+<div class="member" onclick="openMessage('Mrk')">Mrk</div>
+<div class="member" onclick="openMessage('IVY')">IVY</div>
+<div class="member" onclick="openMessage('Juswa')">Juswa</div>
+<div class="member" onclick="openMessage('Kaii')">Kaii</div>
+<div class="member" onclick="openMessage('cersei')">cersei</div>
+<div class="member" onclick="openMessage('cinna')">cinna</div>
+
+</div>
+
+</section>
+
+
+<div id="popup" class="popup">
+
+<div class="popup-box">
+
+<h3 id="popupName"></h3>
+<p id="popupText"></p>
+
+<button onclick="closePopup()">Close</button>
+
+</div>
+
+</div>
+
+
+<footer>
+friendship anniversary
+</footer>
+
+
+<script>
+
+const messages={
+
+"Nica":"Nica, thanks talaga for always being part ng group.",
+"Theo":"Theo, salamat sa pagiging kasama sa friendship na to.",
+"53zyr":"Thanks for being part ng group kahit simple lang.",
+"LUCIEN":"Lucien, salamat sa pagiging part ng journey nitong group.",
+"rm":"Salamat sa pagiging kasama sa group na to.",
+"althxyzea":"Thanks for being part ng memories natin dito.",
+"Atøshi":"You helped make this place feel alive.",
+"xeviI":"Salamat sa pagiging part ng group na to.",
+"SEI":"Thanks for being part ng friendship na nabuo dito.",
+"Emmann":"Malaking part ka rin ng group na to.",
+"KORI WATER":"Thanks sa pagiging kasama sa group.",
+"Xio_cyy":"Salamat sa pagiging part ng community na to.",
+"Zenu":"Your presence really matters sa group na to.",
+"akki":"Thanks for always being around.",
+"ZOERN":"You helped shape the group in your own way.",
+"freak":"Your presence always adds something unique.",
+"Michael":"Thanks for being someone people can rely on.",
+"Lordi":"Malaking part ka rin ng group na to.",
+"Jhen":"Thanks for being part ng memories natin.",
+"YERI":"Your friendship means a lot sa group.",
+"rockyy":"You bring good energy sa group.",
+"grain of ryze":"Thanks for being part ng journey.",
+"kulort":"You helped make this place welcoming.",
+"Kyo_J":"Your presence matters sa group.",
+"Mrk":"Thanks for sharing this friendship with everyone.",
+"IVY":"You helped make the group meaningful.",
+"Juswa":"Thanks for being part ng memories.",
+"Kaii":"Hindi magiging pareho yung group kung wala ka.",
+"cersei":"You added something unique sa friendship na to.",
+"cinna":"Thanks for being part ng community."
+
+}
+
+function reveal(){
+
+const section=document.getElementById("friendsSection")
+section.classList.add("show")
+
+section.scrollIntoView({behavior:"smooth"})
+
+const names=document.querySelectorAll(".member")
+
+names.forEach((card,index)=>{
+setTimeout(()=>{
+card.classList.add("visible")
+}, index*180)
+})
+
+}
+
+function openMessage(name){
+
+document.getElementById("popupName").innerText=name
+document.getElementById("popupText").innerText=messages[name]
+
+document.getElementById("popup").classList.add("show")
+
+}
+
+function closePopup(){
+document.getElementById("popup").classList.remove("show")
+}
+
+/* particles */
+
+const canvas=document.getElementById("particles")
+const ctx=canvas.getContext("2d")
+
+canvas.width=window.innerWidth
+canvas.height=window.innerHeight
+
+let particles=[]
+
+for(let i=0;i<80;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2,
+speed:Math.random()*0.4
+})
+}
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+particles.forEach(p=>{
+ctx.beginPath()
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2)
+ctx.fillStyle="white"
+ctx.fill()
+
+p.y+=p.speed
+
+if(p.y>canvas.height){
+p.y=0
+p.x=Math.random()*canvas.width
+}
+
+})
+
+requestAnimationFrame(animate)
+
+}
+
+animate()
+
+</script>
+
+</body>
+</html>
